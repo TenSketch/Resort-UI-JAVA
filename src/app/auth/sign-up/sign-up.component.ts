@@ -312,18 +312,41 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+  // verifyAccount(verificationCode: string): void {
+  //   const url = `http://localhost:8080/api/users/verify?code=${verificationCode}`;
+  //   this.http.get(url).subscribe(
+  //     (response: any) => {
+  //       this.router.navigate(['/signin']);
+  //     },
+  //     (error: any) => {
+  //       console.error('Error occurred during account verification:', error);
+  //       this.showErrorAlert('Error occurred during account verification');
+  //     }
+  //   );
+  // }
+
   verifyAccount(verificationCode: string): void {
     const url = `http://localhost:8080/api/users/verify?code=${verificationCode}`;
     this.http.get(url).subscribe(
       (response: any) => {
-        this.router.navigate(['/signin']);
+        // Check if the response indicates successful verification
+        if (response === 'Successfully your account is verified') {
+          // Navigate to the signin form
+          this.router.navigate(['/signin']);
+        } else {
+          // Handle unexpected response
+          console.error('Unexpected response during account verification:', response);
+          this.showErrorAlert('Unexpected response during account verification');
+        }
       },
       (error: any) => {
+        // Handle error response
         console.error('Error occurred during account verification:', error);
         this.showErrorAlert('Error occurred during account verification');
       }
     );
   }
+  
 
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;

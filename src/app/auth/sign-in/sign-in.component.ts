@@ -25,7 +25,7 @@
 //     private route: ActivatedRoute
 //   ) {
 //     this.form = this.formBuilder.group({
-//       email_address: ['', Validators.required],
+//       email: ['', Validators.required],
 //       password: ['', Validators.required],
 //     });
 //   }
@@ -48,7 +48,7 @@
 //         const modifiedInValidForm = JSON.parse(checkUserExist || '[]');
 //         const ValidUser = modifiedInValidForm.find(
 //           (v: any) =>
-//             v.email_id === this.form.value.email_address &&
+//             v.email_id === this.form.value.email &&
 //             v.password === this.form.value.password
 //         );
 //         if (ValidUser) {
@@ -127,7 +127,7 @@ showAlert: any;
     private route: ActivatedRoute
   ) {
     this.form = this.formBuilder.group({
-      email_address: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -146,9 +146,10 @@ showAlert: any;
       this.isLoading = true;
 
       const credentials = {
-        email: this.form.value.email_address,
+        email: this.form.value.email,
         password: this.form.value.password
       };
+      console.log(credentials);
 
       // Adjust the URL to match your backend login endpoint
       this.http.post('http://localhost:8080/api/users/login', credentials).subscribe(

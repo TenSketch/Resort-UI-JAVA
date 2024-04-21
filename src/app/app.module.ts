@@ -70,6 +70,7 @@ import { ChangePasswordComponent } from './modules/change-password/change-passwo
 import { BookingSuccessfullComponent } from './modules/booking-successfull/booking-successfull.component';
 import { RoomsComponent } from './modules/resorts/rooms/rooms.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
